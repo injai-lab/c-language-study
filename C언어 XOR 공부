@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
+#include <time.h>
+
+#define INPUT_NODES 2
+#define HIDDEN_NODES 2
+#define OUTPUT_NODES 1
+
+// XOR 데이터
+
+double input[4][2] = {
+	{0, 0},
+	{0, 1},
+	{1, 0},
+	{1, 1}
+};
+double target[4] = { 0, 1, 1, 0 };
+
+// 가중치 및 바이러스
+double w_input_hidden[INPUT_NODES][HIDDEN_NODES];
+double b_hidden[HIDDEN_NODES];
+
+double w_hidden_output[HIDDEN_NODES];
+double b_output;
+
+// 시그모이드 함수
+double sigmoid(double x) {
+	return 1.0 / (1.0 + exp(-x));
+}
+
+// 난수 초기화 함수
+double rand_weight() {
+	return ((double)rand() / RAND_MAX) * 2 - 1; // -1.0 ~ 1.0
+}
+
+void init_weights() {
+	for (int i = 0; i < INPUT_NODES; i++) {
+		for (int j = 0; j < HIDDEN_NODES; j++) {
+			w_input_hidden[i][j] = rand_weight();
+		}
+	}
+	for (int j = 0; j < HIDDEN_NODES; j++) {
+		b_hidden[j] = rand_weight();
+		w_hidden_output[j] = rand_weight();
+	}
+
+	b_output = rand_weight();
+}
+
+void forward(int idx, double* output_result) {
+	double hidden[HIDDEN_NODES];
+
+
+	//입력층 --> 은닉층
+	for (int i = 0; i < HIDDEN_NODES; i++) {
+		hidden[i] = b_hidden[i];
+		for (int j = 0; j < INPUT_NODES; j++) {
+			hidden[i] += input[idx][j] * w_input_hidden[j][i];
+		}
+		hidden[i] = sigmoid(hidden[i]);
+	}
+
+	double output = b_output;
+	for (int i = 0; i < HIDDEN_NODES; i++) {
+		output += hidden[i] * w_hidden_output[i];
+	}
+	*output_result = sigmoid(output);
+}
+
+int main() {
+	srand((unsigned int)time(NULL));
+
+	init_weights();
+
+	for (int i = 0; i < 4; i++) {
+		double result;
+		forward(i, &result);
+		printf("Input : (%.0f, %.0f) -> Output : %.4f (Target : %.0f)\n",
+			input[i][0], input[i][1], result, target[i]);
+	}
+	return 0;
+}
