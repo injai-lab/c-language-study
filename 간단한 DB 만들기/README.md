@@ -29,7 +29,7 @@ typedef struct Student {
     struct Student* next;
 } Student;
 
----
+---c
 
 ## 📁 파일 저장 형식
 프로그램 종료 시 students.txt에 자동 저장
