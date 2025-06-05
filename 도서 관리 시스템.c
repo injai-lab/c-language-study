@@ -3,37 +3,37 @@
 #include <string.h>
 
 
-// ¿À·¡µÈ ÄÚµå °æ°í¼º ¸Ş½ÃÁö ¹«½ÃÇÏ´Â ÇÔ¼ö
+// ì˜¤ë˜ëœ ì½”ë“œ ê²½ê³ ì„± ë©”ì‹œì§€ ë¬´ì‹œí•˜ëŠ” í•¨ìˆ˜
 #define _CRT_SECURE_NO_WARNINGS
 
-// ±¸Á¶Ã¼ Á¤ÀÇ
+// êµ¬ì¡°ì²´ ì •ì˜
 typedef struct Book {
-	char title[100];    // Ä³¸¯ÅÍ(char) title¿¡ ´ëÇÑ 100°³ÀÇ ¹è¿­
-	char author[50];    // Ä³¸¯ÅÍ(char) author¿¡ ´ëÇÑ 50°³ÀÇ ¹è¿­
-	int year;			// year Á¤¼öÇüÀ¸·Î ¸î ³âÀÎÁö
+	char title[100];    // ìºë¦­í„°(char) titleì— ëŒ€í•œ 100ê°œì˜ ë°°ì—´
+	char author[50];    // ìºë¦­í„°(char) authorì— ëŒ€í•œ 50ê°œì˜ ë°°ì—´
+	int year;			// year ì •ìˆ˜í˜•ìœ¼ë¡œ ëª‡ ë…„ì¸ì§€
 	struct Book* next;  
 }Book;
 
 
-// Ã¥ Ãß°¡
+// ì±… ì¶”ê°€
 void addBook(Book** head, const char* title, const char* author, int year) {
 	Book* newBook = (Book*)malloc(sizeof(Book));
 	
-	// ¸¸¾à newBookÀÌ ¸Ş¸ğ¸® ÇÒ´çÀ» ¹ŞÁö ¸øÇÏ¸é, (newBook == NULL)Àº ¸¸¾à °ªÀÌ ¾ø´Ù¸é.
-	// ¸Ş¸ğ¸® ÇÒ´ç ½ÇÆĞ¶ó°í Ãâ·ÂÀ» ÇØ¶ó.
+	// ë§Œì•½ newBookì´ ë©”ëª¨ë¦¬ í• ë‹¹ì„ ë°›ì§€ ëª»í•˜ë©´, (newBook == NULL)ì€ ë§Œì•½ ê°’ì´ ì—†ë‹¤ë©´.
+	// ë©”ëª¨ë¦¬ í• ë‹¹ ì‹¤íŒ¨ë¼ê³  ì¶œë ¥ì„ í•´ë¼.
 	if (newBook == NULL) {
-		printf("¸Ş¸ğ¸® ÇÒ´ç ½ÇÆĞ\n");
+		printf("ë©”ëª¨ë¦¬ í• ë‹¹ ì‹¤íŒ¨\n");
 		return;
 	}
 
 	/*
-	(*Æ÷ÀÎÅÍ).¸â¹ö    =  ÀÏ¹İÀûÀÎ ±¸Á¶Ã¼ Á¢±Ù ¹æ½Ä   ex) (*newBook).title
-	Æ÷ÀÎÅÍ -> ¸â¹ö    =  À§ÀÇ Ç¥ÇöÀ» °£´ÜÇÏ°Ô ÁÙÀÎ °Í.
+	(*í¬ì¸í„°).ë©¤ë²„    =  ì¼ë°˜ì ì¸ êµ¬ì¡°ì²´ ì ‘ê·¼ ë°©ì‹   ex) (*newBook).title
+	í¬ì¸í„° -> ë©¤ë²„    =  ìœ„ì˜ í‘œí˜„ì„ ê°„ë‹¨í•˜ê²Œ ì¤„ì¸ ê²ƒ.
 	*/
 	strcpy_s(newBook->title, sizeof(newBook->title), title);
 	strcpy_s(newBook->author, sizeof(newBook->author), author);
 	
-	// strcpy´Â ¿À·£µÈ ÇÔ¼ö´Â º¸¾È»ó À§ÇèÇÏ±â ¶§¹®¿¡. strcpy_s·Î º¯È¯
+	// strcpyëŠ” ì˜¤ëœëœ í•¨ìˆ˜ëŠ” ë³´ì•ˆìƒ ìœ„í—˜í•˜ê¸° ë•Œë¬¸ì—. strcpy_së¡œ ë³€í™˜
 	
 	// ex)
 	// strcpy(newBook->title, title); --> strcpy_s(newBooki->title, sizeof(newBook->title), title);
@@ -41,40 +41,40 @@ void addBook(Book** head, const char* title, const char* author, int year) {
 	
 	// newBook->year = NULL;
 
-	if (*head == NULL) {   // head´Â ÀÌÁß Æ÷ÀÎÅÍÀÌ´Ù. (Book** head)
-		*head = newBook;   // ¸®½ºÆ®ÀÇ ½ÃÀÛ ÁÖ¼Ò¸¦ °¡¸®Å°´Â Æ÷ÀÎÅÍ¸¦ ÇÔ¼ö ÀÎÀÚ·Î Àü´Ş¹ŞÀ½.
-	}					   // *head´Â ¿¬°á ¸®½ºÆ®ÀÇ ½ÃÀÛ ³ëµå(Book)¸¦ ÀÇ¹ÌÇÑ´Ù.	
+	if (*head == NULL) {   // headëŠ” ì´ì¤‘ í¬ì¸í„°ì´ë‹¤. (Book** head)
+		*head = newBook;   // ë¦¬ìŠ¤íŠ¸ì˜ ì‹œì‘ ì£¼ì†Œë¥¼ ê°€ë¦¬í‚¤ëŠ” í¬ì¸í„°ë¥¼ í•¨ìˆ˜ ì¸ìë¡œ ì „ë‹¬ë°›ìŒ.
+	}					   // *headëŠ” ì—°ê²° ë¦¬ìŠ¤íŠ¸ì˜ ì‹œì‘ ë…¸ë“œ(Book)ë¥¼ ì˜ë¯¸í•œë‹¤.	
 
-	/* Áï, ¸®½ºÆ®°¡ ºñ¾îÀÖÀ¸¸é(head°¡ NULLÀÌ¸é), »õ·Î ¸¸µç ³ëµå¸¦ Ã¹ ³ëµå·Î ¼³Á¤ÇÏ¶ó.*/
+	/* ì¦‰, ë¦¬ìŠ¤íŠ¸ê°€ ë¹„ì–´ìˆìœ¼ë©´(headê°€ NULLì´ë©´), ìƒˆë¡œ ë§Œë“  ë…¸ë“œë¥¼ ì²« ë…¸ë“œë¡œ ì„¤ì •í•˜ë¼.*/
 
 
 	else {
-		Book* current = *head;      // Book* current¸¦ head·Î ÃÊ±âÈ­ 
-		while (current->next != NULL) {   // current°¡ °¡¸£Å°´Â ³ëµå next °¡ NULLÀÌ ¾Æ´Ò¶§ ±îÁö ¹İº¹.
-			current = current->next;      // ´ÙÀ½ ³ëµå·Î ÀÌµ¿ÇÏ´Â ÄÚµå
-		}								  // À§ µÎ ÁÙÀÌ Áö³ª¸é current°¡ ¸¶Áö¸· ³ëµå°¡ µÊ
-		current->next = newBook;		//  ¸¶Áö¸· ³ëµåÀÇ next¿¡ »õ·Î ¸¸µç ³ëµå ¿¬°á
+		Book* current = *head;      // Book* currentë¥¼ headë¡œ ì´ˆê¸°í™” 
+		while (current->next != NULL) {   // currentê°€ ê°€ë¥´í‚¤ëŠ” ë…¸ë“œ next ê°€ NULLì´ ì•„ë‹ë•Œ ê¹Œì§€ ë°˜ë³µ.
+			current = current->next;      // ë‹¤ìŒ ë…¸ë“œë¡œ ì´ë™í•˜ëŠ” ì½”ë“œ
+		}								  // ìœ„ ë‘ ì¤„ì´ ì§€ë‚˜ë©´ currentê°€ ë§ˆì§€ë§‰ ë…¸ë“œê°€ ë¨
+		current->next = newBook;		//  ë§ˆì§€ë§‰ ë…¸ë“œì˜ nextì— ìƒˆë¡œ ë§Œë“  ë…¸ë“œ ì—°ê²°
 	}
-	/* ÀÌ·Î½á »õ ³ëµå´Â ¸®½ºÆ®ÀÌ ¸Ç ³¡¿¡ ºÙ´Â´Ù.*/
+	/* ì´ë¡œì¨ ìƒˆ ë…¸ë“œëŠ” ë¦¬ìŠ¤íŠ¸ì´ ë§¨ ëì— ë¶™ëŠ”ë‹¤.*/
 }
 
-// Ã¥ ¸ñ·Ï Ãâ·Â
-void printBooks(Book* head) {     // Book ±¸Á¶Ã¼ Æ÷ÀÎÅÍÇÑ ÈÄ head, ½ÃÀÛ ³ëµå¸¦ °¡¸£Å°´Â Æ÷ÀÎÅÍ
-	printf("\n[ µµ¼­ ¸ñ·Ï ]\n");
+// ì±… ëª©ë¡ ì¶œë ¥
+void printBooks(Book* head) {     // Book êµ¬ì¡°ì²´ í¬ì¸í„°í•œ í›„ head, ì‹œì‘ ë…¸ë“œë¥¼ ê°€ë¥´í‚¤ëŠ” í¬ì¸í„°
+	printf("\n[ ë„ì„œ ëª©ë¡ ]\n");
 
 	if (head == NULL) {
-		printf("µî·ÏµÈ µµ¼­°¡ ¾ø½À´Ï´Ù.\n");
+		printf("ë“±ë¡ëœ ë„ì„œê°€ ì—†ìŠµë‹ˆë‹¤.\n");
 		return;
 	}
-	while (head != NULL) {  // head°¡ NULLÀÏ ¶§ ±îÁö while»ç¿ë.
-		printf("Á¦¸ñ : %s | ÀúÀÚ : %s | ÃâÆÇ³âµµ : %d\n", head->title, head->author, head->year);
+	while (head != NULL) {  // headê°€ NULLì¼ ë•Œ ê¹Œì§€ whileì‚¬ìš©.
+		printf("ì œëª© : %s | ì €ì : %s | ì¶œíŒë…„ë„ : %d\n", head->title, head->author, head->year);
 		
-		head = head->next;  // ·çÇÁ¸¶´Ù head¸¦ ´ÙÀ½ ³ëµå·Î ¿Å±è.
-							// ¿¬°á ¸®½ºÆ® ÇÙ½É ´ÙÀ½À» µû¶ó°¡¸é¼­ ¼øÈ¸
+		head = head->next;  // ë£¨í”„ë§ˆë‹¤ headë¥¼ ë‹¤ìŒ ë…¸ë“œë¡œ ì˜®ê¹€.
+							// ì—°ê²° ë¦¬ìŠ¤íŠ¸ í•µì‹¬ ë‹¤ìŒì„ ë”°ë¼ê°€ë©´ì„œ ìˆœíšŒ
 	}
 }
 
-// Ã¥ »èÁ¦ 
+// ì±… ì‚­ì œ 
 void deleteBook(Book** head, const char* title) {
 	Book* current = *head;
 	Book* prev = NULL;
@@ -87,112 +87,112 @@ void deleteBook(Book** head, const char* title) {
 			else {
 				prev->next = current->next;
 			}
-			free(current);
-			printf("'%s' µµ¼­ »èÁ¦ ¿Ï·á.\n", title);
+			free(current);     //current ë©”ëª¨ë¦¬ í•´ì œ
+			printf("'%s' ë„ì„œ ì‚­ì œ ì™„ë£Œ.\n", title);
 			return;
 		}
 		prev = current;
 		current = current->next;
 	}
-	printf("'%s' µµ¼­¸¦ Ã£À» ¼ö ¾ø½À´Ï´Ù.\n", title);
+	printf("'%s' ë„ì„œë¥¼ ì°¾ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤.\n", title);
 }
 
-// ¸Ş¸ğ¸® ÇØÁ¦
+// ë©”ëª¨ë¦¬ í•´ì œ
 void freeAllBooks(Book** head) {
 	Book* current = *head;
 	Book* temp;
 
 	while (current != NULL) {
 		temp = current;
-		current = current->next;
+		current = current->next; // current->next;ë¡œ ë‹¤ìŒìœ¼ë¡œ ë„˜ê²¨ì¤Œ.
 		free(temp);
 	}
 	*head = NULL;
 }
 
 int main() {
-	Book* head = NULL; // µµ¼­ ¸®½ºÆ®ÀÇ ½ÃÀÛ ³ëµå¸¦ °¡¸®Å°´Â Æ÷ÀÎÅÍ 
-	// (¾Æ¹« ³ëµå°¡ ¾øÀ¸¸é NULL)
+	Book* head = NULL; // ë„ì„œ ë¦¬ìŠ¤íŠ¸ì˜ ì‹œì‘ ë…¸ë“œë¥¼ ê°€ë¦¬í‚¤ëŠ” í¬ì¸í„° 
+	// (ì•„ë¬´ ë…¸ë“œê°€ ì—†ìœ¼ë©´ NULL)
 	
-	/* »ç¿ëÀÚ ÀÔ·ÂÀ» ¹ŞÀ» º¯¼öµé*/
+	/* ì‚¬ìš©ì ì…ë ¥ì„ ë°›ì„ ë³€ìˆ˜ë“¤*/
 	int choice;
 	char title[100], author[50];
 	int year;    
 
-	// while 1Àº TRUE¸¦ ¸»ÇÔ ¹«ÇÑ ·çÇÁ¸¦ µµ´Â °Í.
+	// while 1ì€ TRUEë¥¼ ë§í•¨ ë¬´í•œ ë£¨í”„ë¥¼ ë„ëŠ” ê²ƒ.
 	while (1) {
-		printf("\n[¸Ş´º] 1. µµ¼­ Ãß°¡ 2.¸ñ·Ï Ãâ·Â 3.»èÁ¦ 4.Á¾·á\n ¼±ÅÃ : "); // ¼³¸íÇØÁÖ´Â ¹®Àåµé.
+		printf("\n[ë©”ë‰´] 1. ë„ì„œ ì¶”ê°€ 2.ëª©ë¡ ì¶œë ¥ 3.ì‚­ì œ 4.ì¢…ë£Œ\n ì„ íƒ : "); // ì„¤ëª…í•´ì£¼ëŠ” ë¬¸ì¥ë“¤.
 		if (scanf_s("%d", &choice) != 1) {
-			printf("¼ıÀÚ¸¦ ÀÔ·ÂÇÏ¼¼¿ä.\n");
-			while (getchar() != '\n');  // Àß¸øµÈ ÀÔ·Â ¹öÆÛ ºñ¿ì±â
-			continue;  // continue·Î ´Ù½Ã ¹İÈ¯.
+			printf("ìˆ«ìë¥¼ ì…ë ¥í•˜ì„¸ìš”.\n");
+			while (getchar() != '\n');  // ì˜ëª»ëœ ì…ë ¥ ë²„í¼ ë¹„ìš°ê¸°
+			continue;  // continueë¡œ ë‹¤ì‹œ ë°˜í™˜.
 		}
-		while (getchar() != '\n'); // °³Çà ¹®ÀÚ Á¦°Å
-		/* scanf_s()·Î ¼ıÀÚ ¾Æ´Ñ °É ÀÔ·ÂÇÏ¸é ¹«ÇÑ ·çÇÁ ºüÁö´Â ¹®Á¦¸¦ ¿¹¹æÇÏ´Â °Í.*/
-		/* getchar()·Î ¹öÆÛ¿¡ ³²Àº \n Á¦°ÅÇÏ´Â °Í*/
+		while (getchar() != '\n'); // ê°œí–‰ ë¬¸ì ì œê±°
+		/* scanf_s()ë¡œ ìˆ«ì ì•„ë‹Œ ê±¸ ì…ë ¥í•˜ë©´ ë¬´í•œ ë£¨í”„ ë¹ ì§€ëŠ” ë¬¸ì œë¥¼ ì˜ˆë°©í•˜ëŠ” ê²ƒ.*/
+		/* getchar()ë¡œ ë²„í¼ì— ë‚¨ì€ \n ì œê±°í•˜ëŠ” ê²ƒ*/
 
 		// scanf("%d", &choice);
 		// getchar();
 
-		switch (choice) {   //choice »ç¿ëÀÚ°¡ ¹öÆ°À» °ñ¶úÀ» ¶§ ¾î¶»°Ô 1, 2, 3, 4¹øÁß¿¡ ¼±ÅÃÀ» ¶§ÀÇ ¹®Àåµé.
+		switch (choice) {   //choice ì‚¬ìš©ìê°€ ë²„íŠ¼ì„ ê³¨ëì„ ë•Œ ì–´ë–»ê²Œ 1, 2, 3, 4ë²ˆì¤‘ì— ì„ íƒì„ ë•Œì˜ ë¬¸ì¥ë“¤.
 
-		// 1¹ø µµ¼­ Ãß°¡
+		// 1ë²ˆ ë„ì„œ ì¶”ê°€
 		case 1:
-			printf("Á¦¸ñ ÀÔ·Â : ");
-			fgets(title, sizeof(title), stdin);   // fgets·Î Á¦¸ñ ÀÔ·Â
+			printf("ì œëª© ì…ë ¥ : ");
+			fgets(title, sizeof(title), stdin);   // fgetsë¡œ ì œëª© ì…ë ¥
 
-			title[strcspn(title, "\n")] = '\0'; // strcspn(..., "\n")À¸·Î ¹®ÀÚ¿­ ³¡¿¡ ºÙ´Â \nÁ¦°Å
-			// fegts´Â ÀÚµ¿À¸·Î \nÀ» ³Ö±â  ¶§¹®¿¡
+			title[strcspn(title, "\n")] = '\0'; // strcspn(..., "\n")ìœ¼ë¡œ ë¬¸ìì—´ ëì— ë¶™ëŠ” \nì œê±°
+			// fegtsëŠ” ìë™ìœ¼ë¡œ \nì„ ë„£ê¸°  ë•Œë¬¸ì—
 
-			printf("ÀúÀÚ ÀÔ·Â : ");
-			fgets(author, sizeof(author), stdin); //fgets·Î ÀúÀÚ ÀÔ·Â
+			printf("ì €ì ì…ë ¥ : ");
+			fgets(author, sizeof(author), stdin); //fgetsë¡œ ì €ì ì…ë ¥
 
-			author[strcspn(author, "\n")] = '\0'; // strcspn(..., "\n")À¸·Î ¹®ÀÚ¿­ ³¡¿¡ ºÙ´Â \n Á¦°Å
+			author[strcspn(author, "\n")] = '\0'; // strcspn(..., "\n")ìœ¼ë¡œ ë¬¸ìì—´ ëì— ë¶™ëŠ” \n ì œê±°
 
-			printf("ÃâÆÇ³âµµ ÀÔ·Â : ");
-			if (scanf_s("%d", &year) != 1) {     // ÃâÆÇ³âµµ¸¦ ¼ıÀÚ°¡ ¾Æ´Ñ ´Ù¸¥ ¼ö°¡ µé¾î¿ÀÁö  ¾Ê°Ô ¸¸µå´Â °Í.
-				printf("ÃâÆÇ³âµµ´Â ¼ıÀÚÀÔ´Ï´Ù. \n"); // scanf¸¦ ÅëÇØ ¼ıÀÚÀÎÁö ±¸º°. scanf("%d"¸¦ ,year°ªÀ» °¡Á®¿Í ¼ıÀÚÀÎÁö ±¸º°ÇÏ´Â °Í.
+			printf("ì¶œíŒë…„ë„ ì…ë ¥ : ");
+			if (scanf_s("%d", &year) != 1) {     // ì¶œíŒë…„ë„ë¥¼ ìˆ«ìê°€ ì•„ë‹Œ ë‹¤ë¥¸ ìˆ˜ê°€ ë“¤ì–´ì˜¤ì§€  ì•Šê²Œ ë§Œë“œëŠ” ê²ƒ.
+				printf("ì¶œíŒë…„ë„ëŠ” ìˆ«ìì…ë‹ˆë‹¤. \n"); // scanfë¥¼ í†µí•´ ìˆ«ìì¸ì§€ êµ¬ë³„. scanf("%d"ë¥¼ ,yearê°’ì„ ê°€ì ¸ì™€ ìˆ«ìì¸ì§€ êµ¬ë³„í•˜ëŠ” ê²ƒ.
 				while (getchar() != '\n');    // while getchar() ! = \n
 				break;
 			}
 //			scanf("%d", &year);
 //			getchar();
 
-			addBook(&head, title, author, year); //Book**·Î head¸¦ Àü´Ş -> ¸®½ºÆ®¿¡ ½ÇÁ¦·Î ³ëµå Ãß°¡ ±â´É.
+			addBook(&head, title, author, year); //Book**ë¡œ headë¥¼ ì „ë‹¬ -> ë¦¬ìŠ¤íŠ¸ì— ì‹¤ì œë¡œ ë…¸ë“œ ì¶”ê°€ ê¸°ëŠ¥.
 			break;
 
 		case 2:
-			printBooks(head);   // 1¹ø¿¡¼­ µµ¼­ ÀÔ·ÂÇß´ø °ÍµéÀ» º¸¿©ÁÜ
+			printBooks(head);   // 1ë²ˆì—ì„œ ë„ì„œ ì…ë ¥í–ˆë˜ ê²ƒë“¤ì„ ë³´ì—¬ì¤Œ
 			break;
-			/* ¿¬°á ¸®½ºÆ® ¼øÈ¸ÇÏ¸ç ¸ğµç Ã¥ Ãâ·Â.*/
+			/* ì—°ê²° ë¦¬ìŠ¤íŠ¸ ìˆœíšŒí•˜ë©° ëª¨ë“  ì±… ì¶œë ¥.*/
 
 		case 3:
-			printf("»èÁ¦ÇÒ Ã¥ Á¦¸ñ : ");  // ¹®Àå Ãâ·Â ¹®.
-			fgets(title, sizeof(title), stdin); // scanf("%s", titleÀ» ¾²¸é, °ø¹é ÀÖ´Â ¹®ÀÚ¸¦ ¾ò±â ½±Áö¾ÊÀ½.
-												// ±×¸®ÇÏ¿©, fgets´Â °ø¹é Æ÷ÇÔ ¹®ÀÚ¿­À» ¾ÈÀüÇÏ°Ô ¹ŞÀ» ¼ö ÀÖÀ½.
-												// sizefof(title)Àº ¹öÆÛ Å©±â (100), stdinÀº Ç¥ÁØÀÔ·ÂÀåÄ¡(Å°º¸µå ÀÇ¹Ì)
-			/* Å°º¸µå·Î ÀÔ·Â ¹Ş´Â title Á¦¸ñ Å©±â´Â title(100)ÀÚ¸®´Â ºÎ¿© ¹ŞÀ½.*/
-			title[strcspn(title, "\n")] = '\0'; // fgets()´Â ¹®ÀÚ¿­ ³¡¿¡ °³Çà ¹®ÀÚ(\n)¸¦ ÀÚµ¿À¸·Î Æ÷ÇÔ. ÀÌ¸¦ Á¦°Å
-												// strcspn(title, "\n")Àº title ¹®ÀÚ¿­¿¡¼­ \nÀÌ Ã³À½ ³ªÅ¸³ª´Â À§Ä¡¸¦ ¾Ë·ÁÁÜ.
-												// ÇØ´ç À§Ä¡¿¡ '\0'À» ³ÖÀ¸¸é, ¹®ÀÚ¿­ Á¾·á°¡ µÇ¸é¼­ \nÀÌ Á¦°ÅµË´Ï´Ù.
+			printf("ì‚­ì œí•  ì±… ì œëª© : ");  // ë¬¸ì¥ ì¶œë ¥ ë¬¸.
+			fgets(title, sizeof(title), stdin); // scanf("%s", titleì„ ì“°ë©´, ê³µë°± ìˆëŠ” ë¬¸ìë¥¼ ì–»ê¸° ì‰½ì§€ì•ŠìŒ.
+												// ê·¸ë¦¬í•˜ì—¬, fgetsëŠ” ê³µë°± í¬í•¨ ë¬¸ìì—´ì„ ì•ˆì „í•˜ê²Œ ë°›ì„ ìˆ˜ ìˆìŒ.
+												// sizefof(title)ì€ ë²„í¼ í¬ê¸° (100), stdinì€ í‘œì¤€ì…ë ¥ì¥ì¹˜(í‚¤ë³´ë“œ ì˜ë¯¸)
+			/* í‚¤ë³´ë“œë¡œ ì…ë ¥ ë°›ëŠ” title ì œëª© í¬ê¸°ëŠ” title(100)ìë¦¬ëŠ” ë¶€ì—¬ ë°›ìŒ.*/
+			title[strcspn(title, "\n")] = '\0'; // fgets()ëŠ” ë¬¸ìì—´ ëì— ê°œí–‰ ë¬¸ì(\n)ë¥¼ ìë™ìœ¼ë¡œ í¬í•¨. ì´ë¥¼ ì œê±°
+												// strcspn(title, "\n")ì€ title ë¬¸ìì—´ì—ì„œ \nì´ ì²˜ìŒ ë‚˜íƒ€ë‚˜ëŠ” ìœ„ì¹˜ë¥¼ ì•Œë ¤ì¤Œ.
+												// í•´ë‹¹ ìœ„ì¹˜ì— '\0'ì„ ë„£ìœ¼ë©´, ë¬¸ìì—´ ì¢…ë£Œê°€ ë˜ë©´ì„œ \nì´ ì œê±°ë©ë‹ˆë‹¤.
 			/*
-			ÀÔ·Â Àü : "C Programming\n"
-			ÀÔ·Â ÈÄ : "C Programming"
+			ì…ë ¥ ì „ : "C Programming\n"
+			ì…ë ¥ í›„ : "C Programming"
 			*/
-			deleteBook(&head, title); // ¿¬°á ¸®½ºÆ®¿¡¼­ title°ú °°Àº Á¦¸ñÀ» °¡Áø ³ëµå¸¦ »èÁ¦ÇÏ´Â ÇÔ¼ö,
-									 // &head¸¦ ³Ñ±â´Â ÀÌÀ¯´Â »èÁ¦ ´ë»óÀÌ Ã¹ ¹øÂ° ³ëµåÀÌ¸é ¾ÈµÇ±â ¶§¹®
-									//Ã¹ ¹øÂ° ³ëµå¸¦ »èÁ¦½ÃÅ°¸é headÀÚÃ¼¸¦ ¹Ù²ã¾ß ÇÏ¹Ç·Î ÀÌÁß Æ÷ÀÎÅÍ¸¦ 
-									// ³Ñ±ä´Ù. ³»ºÎÀûÀ¸·Î´Â strcmp(current->title, title)·Î ºñ±³ÇØ¼­ ÀÏÄ¡ÇÏ¸é
-									// »èÁ¦ÇÑ´Ù.
+			deleteBook(&head, title); // ì—°ê²° ë¦¬ìŠ¤íŠ¸ì—ì„œ titleê³¼ ê°™ì€ ì œëª©ì„ ê°€ì§„ ë…¸ë“œë¥¼ ì‚­ì œí•˜ëŠ” í•¨ìˆ˜,
+									 // &headë¥¼ ë„˜ê¸°ëŠ” ì´ìœ ëŠ” ì‚­ì œ ëŒ€ìƒì´ ì²« ë²ˆì§¸ ë…¸ë“œì´ë©´ ì•ˆë˜ê¸° ë•Œë¬¸
+									//ì²« ë²ˆì§¸ ë…¸ë“œë¥¼ ì‚­ì œì‹œí‚¤ë©´ headìì²´ë¥¼ ë°”ê¿”ì•¼ í•˜ë¯€ë¡œ ì´ì¤‘ í¬ì¸í„°ë¥¼ 
+									// ë„˜ê¸´ë‹¤. ë‚´ë¶€ì ìœ¼ë¡œëŠ” strcmp(current->title, title)ë¡œ ë¹„êµí•´ì„œ ì¼ì¹˜í•˜ë©´
+									// ì‚­ì œí•œë‹¤.
 			break;
 
 		case 4:
-			freeAllBooks(&head); // µ¿ÀûÇÒ´çÀÌµÈ ¸ğµç ¸Ş¸ğ¸®¸¦ ÇØÁ¦ ÈÄ Á¤»ó Á¾·áÇÔ.
+			freeAllBooks(&head); // ë™ì í• ë‹¹ì´ëœ ëª¨ë“  ë©”ëª¨ë¦¬ë¥¼ í•´ì œ í›„ ì •ìƒ ì¢…ë£Œí•¨.
 			head = NULL; 
 			return 0;
 
 		default :
-			printf("Àß¸øµÈ ¼±ÅÃÀÔ´Ï´Ù.\n");
+			printf("ì˜ëª»ëœ ì„ íƒì…ë‹ˆë‹¤.\n");
 		}
 	}
 }
