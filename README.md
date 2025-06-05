@@ -3,6 +3,45 @@
 이 저장소는 C 언어의 기초부터 자료구조, 알고리즘까지 폭넓게 공부하고 정리하기 위해 만들어졌습니다. 학습한 내용을 실습 예제와 함께 기록하여, 반복 학습 및 참고용으로 사용됩니다.
 
 ---
+visual studio code에서 하는법
+
+1. mingw 다운로드..
+![image](https://github.com/user-attachments/assets/03e431b7-aa3e-4711-b675-1bf696a2085d)
+이렇게 우클릭을 눌러서 3개를 체크.
+
+3. installation에서
+   apply 클릭.
+   ![image](https://github.com/user-attachments/assets/cd2e2c09-7ec2-4ec5-9f2d-41a2149e4a0a)
+다 되면 close.
+  
+4. 환경변수 설정.
+window 검색창에 변수 작성.
+![image](https://github.com/user-attachments/assets/9ebfd32b-782f-4f03-bcdc-b884f8081823)
+
+![image](https://github.com/user-attachments/assets/4f165c9d-5512-460d-a8cf-6f28a63a77a8)
+아래에 있는 path클릭 및 편집 클릭
+
+새로만들기 클릭 -> minGw폴더 경로  bin폴더.
+![image](https://github.com/user-attachments/assets/0641bb05-0fe7-4f8a-abcd-3f87260a358c)
+
+bin 폴더까지.
+F:\minGw\bin 내 pc 경로.
+
+환경변수 추가.
+
+5. cmd 실행
+   gcc -v
+   ![image](https://github.com/user-attachments/assets/71375028-130b-417c-ba23-b6e36eaedd5a)
+   마지막 줄 gcc version 6.3.0이 뜨면 잘 된거다.
+
+6. visual studio code 확장자 설치.
+   visual studio code 실행
+   ![image](https://github.com/user-attachments/assets/9937e424-62a1-43a7-85b3-354093b1a792)
+   설치
+
+   
+
+
 
 ## 📁 저장소 구성
 
